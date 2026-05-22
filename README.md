@@ -50,5 +50,7 @@ warning: `clippy-bug-of-needless-range-loop` (bin "clippy-bug-of-needless-range-
     Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.01s
 ```
 
+そして、よく考えると、`j` の方のイテレーターは、`frames.iter().take(frame_count)` では得られない。
+
 どうでしょうか。
 
