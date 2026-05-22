@@ -1,5 +1,8 @@
 # clippy-bug-of-needless-range-loop
 
+- rustc 1.94.0 (4a4ef493e 2026-03-02)
+- clippy 0.1.94 (4a4ef493e3 2026-03-02)
+
 以下のRustソースを食わせると、 `#[warn(clippy::needless_range_loop)]` を踏む。
 
 
@@ -48,3 +51,4 @@ warning: `clippy-bug-of-needless-range-loop` (bin "clippy-bug-of-needless-range-
 ```
 
 どうでしょうか。
+
