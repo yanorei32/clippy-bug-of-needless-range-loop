@@ -11,7 +11,9 @@ for j in 0..frame_count {
 }
 ```
 
-この指摘はおかしい気がする（が、確証はない）:
+外側のイテレーターを内側のイテレーターよりも、内側でイテレートする必要があり、
+この指摘はおかしい気がしている（確証はない）:
+
 
 ```
 warning: the loop variable `j` is only used to index `frames`
