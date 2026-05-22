@@ -54,3 +54,7 @@ warning: `clippy-bug-of-needless-range-loop` (bin "clippy-bug-of-needless-range-
 
 どうでしょうか。
 
+## 追記
+
+ClippyのIssueにぶら下げた。
+https://github.com/rust-lang/rust-clippy/issues/16631#issuecomment-4516935963
