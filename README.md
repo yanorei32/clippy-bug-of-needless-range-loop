@@ -58,3 +58,55 @@ warning: `clippy-bug-of-needless-range-loop` (bin "clippy-bug-of-needless-range-
 
 ClippyのIssueにぶら下げた。
 https://github.com/rust-lang/rust-clippy/issues/16631#issuecomment-4516935963
+
+## 追記2
+
+https://github.com/rust-lang/rust-clippy/pull/16634 で提案されているPullRequestを試してみた。
+
+しかし、以下の警告が依然として出る。
+
+`frames[i][i]` のパターンはどうにかなったのかもしれないが、`[i][j]`のパターンは考慮していなかったのかもしれない。
+
+この問題の解決は難しそうだ。
+
+```
+warning: the loop variable `j` is only used to index `frames[i]`
+ --> src/main.rs:6:14
+  |
+6 |     for j in 0..frame_count {
+  |              ^^^^^^^^^^^^^^
+  |
+note: for this index operation
+ --> src/main.rs:8:26
+  |
+8 |             print!("{}", frames[i][j]);
+  |                          ^^^^^^^^^^^^
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_range_loop
+  = note: `#[warn(clippy::needless_range_loop)]` on by default
+help: consider using an iterator
+  |
+6 -     for j in 0..frame_count {
+6 +     for <item> in frames[i].iter().take(frame_count) {
+  |
+
+warning: the loop variable `i` is only used to index `frames`
+ --> src/main.rs:7:18
+  |
+7 |         for i in 0..channel_count {
+  |                  ^^^^^^^^^^^^^^^^
+  |
+note: for this index operation
+ --> src/main.rs:8:26
+  |
+8 |             print!("{}", frames[i][j]);
+  |                          ^^^^^^^^^
+  = help: for further information visit https://rust-lang.github.io/rust-clippy/master/index.html#needless_range_loop
+help: consider using an iterator
+  |
+7 -         for i in 0..channel_count {
+7 +         for <item> in frames.iter().take(channel_count) {
+  |
+
+warning: `clippy-bug-of-needless-range-loop` (bin "clippy-bug-of-needless-range-loop") generated 2 warnings
+    Finished `dev` profile [unoptimized + debuginfo] target(s) in 0.11s
+```
